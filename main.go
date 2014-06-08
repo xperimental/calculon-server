@@ -68,6 +68,7 @@ func calculateHandler(rw http.ResponseWriter, req *http.Request) {
 }
 
 func main() {
+	http.Handle("/", http.FileServer(http.Dir("web/")))
 	http.HandleFunc("/calc", calculateHandler)
 
 	port := "8080"
