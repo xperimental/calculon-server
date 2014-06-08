@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 )
 
 type Request struct {
@@ -67,11 +68,19 @@ func calculateHandler(rw http.ResponseWriter, req *http.Request) {
 	}
 }
 
+func getPort() string {
+	port := os.Getenv("PORT")
+	if len(port) == 0 {
+		port = "8080"
+	}
+	return port
+}
+
 func main() {
 	http.Handle("/", http.FileServer(http.Dir("web/")))
 	http.HandleFunc("/calc", calculateHandler)
 
-	port := "8080"
+	port := getPort()
 	log.Printf("Listening on port %s", port)
 	log.Fatal(http.ListenAndServe(":"+port, nil))
 }

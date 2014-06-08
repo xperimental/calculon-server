@@ -1,0 +1,5 @@
+{
+	"ImportPath": "github.com/xperimental/calculon-server",
+	"GoVersion": "go1.2.1",
+	"Deps": []
+}
